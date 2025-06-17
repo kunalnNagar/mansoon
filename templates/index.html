@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mansoon</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .body{
+            display:flex;
+            align-items: center;
+            justify-content: center;
+            background-image: url(/static/img/download.jpeg);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100vh;
+            
+        }
+        .main{
+            /* background-image: url(/static/img/new12.jpeg); */
+            /* backdrop-filter: 15px; */
+            background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+            backdrop-filter: blur(5px); 
+            /* -webkit-backdrop-filter: blur(100px); */
+            padding: 40px;
+            border-radius: 20px;
+            color: white;
+        }
+        .main input{
+            border-radius: 30px;
+            height: 48px;
+            padding: 15px;
+            border: none;
+            width: 342px;
+        }
+        @media (min-width: 411px) and (max-width: 575px) {
+          .main input{
+              margin-bottom: 17px !important;
+         }
+        }
+        .main button{
+            border: none;
+            border-radius: 30px;
+            padding: 10px;
+            {% comment %} width: 100px; {% endcomment %}
+        }
+        .main button i{
+            font-size: 25px;
+        }
+    </style>
+  </head>
+  <body>
+
+    <div class="body">
+        <div class="row w-100">
+            <div class="col-lg-4 offset-lg-4 ">
+                <div class="main">
+                   <div class="d-flex flex-column justify-content-center align-items-center">
+                     <form method="post">
+                        {% csrf_token %}
+                        <input type="search" placeholder="Enter Your City" name="q" id="">
+                        <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </form>
+                    <img src="https://openweathermap.org/img/wn/{{icon}}@2x.png" class="img-fluid pt-3" alt="">
+                    <h5 class="pb-3">{{desc}}</h5>
+                    <h1>{{temprature}}<sup>°C</sup></h1>
+                    {% if error %}
+                    <h3 class="text-danger">{{city}}</h3>
+                    <h5 class="alert alert-info">{{error}}</h5>
+                    {% else %}
+                    <h3>{{city}}</h3>
+                    {% endif %}
+                   </div>
+                   <div class="row py-3 my-2">
+                    <div class="col-lg-6">
+                        <div class="d-flex justify-content-center align-items-center">
+                            <h3><i class="fa-solid fa-water fs-3 p-1"></i></h3>
+                            <div>
+                                <h4 class="m-0">{{humidity}}%</h4>
+                                <p>humidity</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="d-flex justify-content-center align-items-center">
+                            <h3><i class="fa-solid fa-wind fs-3 p-1"></i></h3>
+                            <div>
+                                <h4 class="m-0">{{wind}} <span class="fs-5"> km/h</span></h4>
+                                <p>Wind Speed</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="d-flex justify-content-center align-items-center">
+                            <h3><i class="fa-solid fa-earth-americas fs-3 p-2"></i></h3>
+                            <div>
+                                <h4 class="m-0">{{see}}</h4>
+                                <p>Country</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="d-flex justify-content-center align-items-center">
+                            <h3><i class="fa-solid fa-meteor fs-3 p-1"></i></h3>
+                            <div>
+                                <h4 class="m-0">{{press}}mb</h4>
+                                <p>Pressure</p>
+                            </div>
+                        </div>
+                    </div>
+                   </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+  </body>
+</html>
